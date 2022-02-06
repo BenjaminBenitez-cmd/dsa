@@ -4,6 +4,7 @@ import operator
 
 def postEval(postfixstr):
     ops = {
+        "**": operator.pow,
         "+": operator.add,
         "-": operator.sub,
         "*": operator.mul,
@@ -15,12 +16,14 @@ def postEval(postfixstr):
     for token in tokenList:
         if token in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
             operandStack.push(int(token))
-        else:
+        elif token in ['**', '+', '-', '*', '/']:
             op_fun = ops[token]
             operand2 = operandStack.pop()
             operand1 = operandStack.pop()
             result = op_fun(operand1, operand2)
             operandStack.push(result)
+        else:
+            return 'Error in the expression'
 
     return operandStack.pop()
 

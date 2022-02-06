@@ -1,7 +1,8 @@
+from xml.etree.ElementPath import ops
 from pythonds.basic import Stack
 
 
-def infixToPostfix(infixexpr):
+def inToPost(infixexpr):
     prec = {}
     prec['**'] = 4
     prec["*"] = 3
@@ -20,9 +21,14 @@ def infixToPostfix(infixexpr):
             opStack.push(token)
         elif token == ')':
             topToken = opStack.pop()
-            while topToken != '(':
+
+            while topToken != '(' and not opStack.isEmpty():
                 postfixList.append(topToken)
                 topToken = opStack.pop()
+
+                if topToken != '(' and opStack.isEmpty():
+                    return 'Error in the expression'
+
         elif token in ['**', '*', '/', '+', '-', '(']:
             while (not opStack.isEmpty()) and (prec[opStack.peek()] >= prec[token]):
                 postfixList.append(opStack.pop())
@@ -31,10 +37,16 @@ def infixToPostfix(infixexpr):
             return 'Error in the expression'
 
     while not opStack.isEmpty():
-        postfixList.append(opStack.pop())
+        topToken = opStack.pop()
+
+        if topToken == '(':
+            return 'Error in the expression'
+
+        postfixList.append(topToken)
+
     return " ".join(postfixList)
 
 
-print(infixToPostfix("A * B + C * D)"))
-print(infixToPostfix("( A + B ) * C - ( D - E ) * ( F + G )"))
-print(infixToPostfix("5 * 3 ** ( 4 - 2 )"))
+print(inToPost(")A * B + C) (* D"))
+print(inToPost("( A + B ) * C - ( D - E ) * ( F + G )"))
+print(inToPost("5 * 3 ** ( 4 - 2 )"))
