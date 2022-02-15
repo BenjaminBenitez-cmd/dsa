@@ -1,8 +1,11 @@
 
 
+import timeit
+
+
 class Queue:
-    def __init__(self):
-        self.items = []
+    def __init__(self, items):
+        self.items = [] or items
 
     def isEmpty(self):
         return self.items == []
@@ -20,7 +23,7 @@ class Queue:
 # rear at the end of the list
 
 
-class QueueReversed(Queue):
+class QueueWithAppend(Queue):
 
     def enqueue(self, item):
         self.items.append(item)
@@ -29,14 +32,40 @@ class QueueReversed(Queue):
         return self.items.pop(0)
 
 
-# q = Queue()
-# q.enqueue(4)
-# q.enqueue('Dog')
-# q.enqueue(13)
-# print(q.size())
+# time1 is the first implementation of Queue where the enqueue method makes use
+# of the insert which has a time complexity of O(n)
+# time2 is the second implementation of Queue where the
+# enqueue method makes use of the append method which has
+# a time complexity of O(1)
+# QueueTwo with makes use of append() and pop(0) is faster
+# than the first Queue
+for i in range(1000, 1000001, 2000):
+    t = timeit.Timer("q.enqueue(%d)" % i, "from __main__ import q")
+    td = timeit.Timer("q.dequeue()", "from __main__ import q")
+    t2 = timeit.Timer("q2.enqueue(%d)" % i, "from __main__ import q2")
+    t2d = timeit.Timer("q2.dequeue()", "from __main__ import q2")
 
-q = QueueReversed()
-q.enqueue(4)
-q.enqueue('test')
-q.dequeue()
-print(q.size())
+    q = Queue(list(range(i)))
+    q2 = QueueWithAppend(list(range(i)))
+
+    time1 = t.timeit(number=1000)
+    time1d = td.timeit(number=1000)
+    time2 = t2.timeit(number=1000)
+    time2d = t2d.timeit(number=1000)
+
+    print("Queue, Queue with append")
+    print("%d, %10.3f, %10.3f" %
+          (i, ((time1 + time1d) / 2), ((time2 + time2d) / 2)))
+
+# for i in range(1000, 1000001, 2000):
+#     t = timeit.Timer("q.dequeue()", "from __main__ import q")
+#     t2 = timeit.Timer("q2.dequeue()", "from __main__ import q2")
+
+#     q = Queue(list(range(i)))
+#     q2 = QueueWithAppend(list(range(i)))
+
+#     time1 = t.timeit(number=1000)
+#     time2 = t2.timeit(number=1000)
+
+#     print("Dequeue, Dequeue with append")
+#     print("%d, %10.3f, %10.3f" % (i, time1, time2))
