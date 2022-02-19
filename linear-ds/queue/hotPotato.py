@@ -1,3 +1,4 @@
+import random
 from pythonds.basic import Queue
 
 
@@ -8,7 +9,8 @@ def hotPotato(namelist, num):
         simqueue.enqueue(name)
 
     while simqueue.size() > 1:
-        for i in range(num):
+        randNum = random.randrange(1, num + 1)
+        for i in range(randNum):
             simqueue.enqueue(simqueue.dequeue())
 
         simqueue.dequeue()
