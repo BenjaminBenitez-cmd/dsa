@@ -1,11 +1,12 @@
-# dogs = ['poodle', 'chipoo', 'rotwiller', 'husky']
+from os import remove
 
-# dogs.insert(2, 'doberman')
-# dogs.index()
 
-# for dog in dogs:
-#     print(dog)
+digits = [34, 43, 34, 34, 2, 1]
 
-dogs = []
+digits.remove(34)
+digits.remove(34)
+digits.remove(34)
 
-dogs.insert(0, 'test')
+
+for i in digits:
+    print(i)

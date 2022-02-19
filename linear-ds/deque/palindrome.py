@@ -5,7 +5,8 @@ def palchecker(aString):
     chardeque = Deque()
 
     for ch in aString:
-        chardeque.addRear(ch)
+        if ch != " ":
+            chardeque.addRear(ch)
 
     stillEqual = True
 
@@ -18,4 +19,4 @@ def palchecker(aString):
     return stillEqual
 
 
-print(palchecker('tssst'))
+print(palchecker('tsssrt'))

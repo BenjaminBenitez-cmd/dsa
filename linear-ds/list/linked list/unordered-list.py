@@ -23,6 +23,7 @@ class UnorderedList:
     def __init__(self):
         self.head = None
         self.tail = None
+        self.length = 0
 
     def isEmpty(self):
         return self.head == None
@@ -35,16 +36,10 @@ class UnorderedList:
             self.tail = temp
 
         self.head = temp
+        self.length = self.length + 1
 
     def size(self):
-        current = self.head
-        count = 0
-
-        while current != None:
-            count = count + 1
-            current = current.getNext()
-
-        return count
+        return self.length
 
     def search(self, item):
         current = self.head
@@ -63,12 +58,15 @@ class UnorderedList:
         previous = None
         found = False
 
-        while not found:
+        while not found and current != None:
             if current.getData() == item:
                 found = True
             else:
                 previous = current
                 current = current.getNext()
+
+        if not found:
+            return 'Not found'
 
         if previous == None:
             self.head = current.getNext()
@@ -78,24 +76,17 @@ class UnorderedList:
 
             previous.setNext(current.getNext())
 
-    # Append method time complexity of O(N)
-    # def append(self, item):
-    #     current = self.head
-    #     previous = None
+        self.length = self.length - 1
 
-    #     while current != None:
-    #         previous = current
-    #         current = current.getNext()
-
-    #     temp = Node(item)
-    #     previous.setNext(temp)
-
-    # Append method time complexity O(1)
-    # Accomplished by adding a tail instance variable
-    # when adding new item if its the first add a
     def append(self, item):
         temp = Node(item)
-        self.tail.setNext(temp)
+        if self.head == None:
+            self.head = temp
+            self.tail = temp
+            self.length = self.length + 1
+        else:
+            self.tail.setNext(temp)
+            self.length = self.length + 1
 
     def insert(self, pos, item):
         current = self.head
@@ -114,6 +105,8 @@ class UnorderedList:
             self.head = temp
         else:
             previous.setNext(temp)
+
+        self.length = self.length + 1
 
     def index(self, item):
         current = self.head
@@ -150,12 +143,31 @@ class UnorderedList:
         else:
             previous.setNext(current.getNext())
 
+        self.length = self.length - 1
+
+    def slice(self, start, stop):
+        current = self.head
+        count = 0
+
+        res = UnorderedList()
+
+        while count <= stop:
+            if count >= start and count < stop:
+                res.append(current.getData())
+
+            current = current.getNext()
+            count = count + 1
+
+        return res
+
     def __str__(self):
         current = self.head
-        strArr = ""
+        strArr = "["
         while current != None:
-            strArr = strArr + " ," + str(current.getData())
+            strArr = strArr + str(current.getData()) + " "
             current = current.getNext()
+
+        strArr = strArr + "]"
         return strArr
 
 
@@ -168,7 +180,7 @@ mylist.add(17)
 mylist.add(93)
 mylist.add(26)
 mylist.add(54)
-mylist.remove(31)
 
+slicedlist = mylist.slice(1, 3)
 
-print(mylist)
+print(slicedlist)

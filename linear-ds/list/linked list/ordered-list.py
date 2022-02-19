@@ -1,3 +1,4 @@
+from locale import currency
 from numpy import true_divide
 
 
@@ -19,22 +20,14 @@ class Node:
         self.next = newnext
 
 
-class UnorderedList:
+class OrderedList:
     def __init__(self):
         self.head = None
         self.tail = None
+        self.length = 0
 
     def isEmpty(self):
         return self.head == None
-
-    def add(self, item):
-        temp = Node(item)
-        temp.setNext(self.head)
-
-        if self.head == None:
-            self.tail = temp
-
-        self.head = temp
 
     def size(self):
         current = self.head
@@ -45,18 +38,6 @@ class UnorderedList:
             current = current.getNext()
 
         return count
-
-    def search(self, item):
-        current = self.head
-        found = False
-
-        while current != None and not found:
-            if current.getData() == item:
-                found = True
-            else:
-                current = current.getNext()
-
-        return found
 
     def remove(self, item):
         current = self.head
@@ -78,42 +59,43 @@ class UnorderedList:
 
             previous.setNext(current.getNext())
 
-    # Append method time complexity of O(N)
-    # def append(self, item):
-    #     current = self.head
-    #     previous = None
+        self.length = self.length - 1
 
-    #     while current != None:
-    #         previous = current
-    #         current = current.getNext()
+    def search(self, item):
+        current = self.head
+        found = False
+        stop = False
 
-    #     temp = Node(item)
-    #     previous.setNext(temp)
+        while current != None and not found and not stop:
+            if current.getData() == item:
+                found = True
+            else:
+                if current.getData() > item:
+                    stop = True
+                else:
+                    current = current.getNext()
+        return found
 
-    # Append method time complexity O(1)
-    # Accomplished by adding a tail instance variable
-    # when adding new item if its the first add a
-    def append(self, item):
-        temp = Node(item)
-        self.tail.setNext(temp)
-
-    def insert(self, pos, item):
+    def add(self, item):
         current = self.head
         previous = None
-        count = 0
+        stop = False
 
-        while count != pos:
-            previous = current
-            current = current.getNext()
-            count = count + 1
-
+        while current != None and not stop:
+            if current.getData() > item:
+                stop = True
+            else:
+                previous = current
+                current = current.getNext()
         temp = Node(item)
-        temp.setNext(current)
-
         if previous == None:
+            temp.setNext(self.head)
             self.head = temp
         else:
+            temp.setNext(current)
             previous.setNext(temp)
+
+        self.length = self.length + 1
 
     def index(self, item):
         current = self.head
@@ -150,6 +132,8 @@ class UnorderedList:
         else:
             previous.setNext(current.getNext())
 
+        self.length = self.length - 1
+
     def __str__(self):
         current = self.head
         strArr = ""
@@ -159,7 +143,7 @@ class UnorderedList:
         return strArr
 
 
-mylist = UnorderedList()
+mylist = OrderedList()
 
 
 mylist.add(31)
@@ -169,4 +153,4 @@ mylist.add(93)
 mylist.add(26)
 mylist.add(54)
 mylist.pop()
-print(mylist)
+print(mylist.size())
