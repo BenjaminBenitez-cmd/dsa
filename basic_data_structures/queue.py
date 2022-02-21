@@ -56,16 +56,3 @@ for i in range(1000, 1000001, 2000):
     print("Queue, Queue with append")
     print("%d, %10.3f, %10.3f" %
           (i, ((time1 + time1d) / 2), ((time2 + time2d) / 2)))
-
-# for i in range(1000, 1000001, 2000):
-#     t = timeit.Timer("q.dequeue()", "from __main__ import q")
-#     t2 = timeit.Timer("q2.dequeue()", "from __main__ import q2")
-
-#     q = Queue(list(range(i)))
-#     q2 = QueueWithAppend(list(range(i)))
-
-#     time1 = t.timeit(number=1000)
-#     time2 = t2.timeit(number=1000)
-
-#     print("Dequeue, Dequeue with append")
-#     print("%d, %10.3f, %10.3f" % (i, time1, time2))

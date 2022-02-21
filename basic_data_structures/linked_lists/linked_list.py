@@ -1,3 +1,6 @@
+import timeit
+
+
 class Node:
     def __init__(self, initdata):
         self.data = initdata
@@ -80,31 +83,6 @@ class List:
 
         self.length = self.length + 1
 
-    def remove(self, item):
-        current = self.head
-        previous = None
-        found = False
-
-        while not found and current != None:
-            if current.getData() == item:
-                found = True
-            else:
-                previous = current
-                current = current.getNext()
-
-        if not found:
-            return 'Not found'
-
-        if previous == None:
-            self.head = current.getNext()
-        else:
-            if item == self.tail.getData():
-                self.tail = previous
-
-            previous.setNext(current.getNext())
-
-        self.length = self.length - 1
-
     def index(self, item):
         current = self.head
         count = 0
@@ -127,7 +105,7 @@ class List:
         previous = None
         last = False
 
-        while not last:
+        while current != None and not last:
             next = current.getNext()
             if next == None:
                 last = True
@@ -204,13 +182,3 @@ class OrderedList(List):
             previous.setNext(temp)
 
         self.length = self.length + 1
-
-
-mylist = OrderedList()
-
-
-mylist.add(1)
-mylist.add(10)
-mylist.add(5)
-
-print(mylist)

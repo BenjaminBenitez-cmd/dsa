@@ -1,12 +1,3 @@
-from os import remove
+myList = list(range(100))
 
-
-digits = [34, 43, 34, 34, 2, 1]
-
-digits.remove(34)
-digits.remove(34)
-digits.remove(34)
-
-
-for i in digits:
-    print(i)
+print(range(20))

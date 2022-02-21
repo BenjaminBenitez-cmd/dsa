@@ -2,24 +2,24 @@ import timeit
 import random
 
 
-def test1():
-    l = []
-    for i in range(1000):
-        l = l + [i]
+# def test1():
+#     l = []
+#     for i in range(1000):
+#         l = l + [i]
 
 
-def test2():
-    l = []
-    for i in range(1000):
-        l.append(i)
+# def test2():
+#     l = []
+#     for i in range(1000):
+#         l.append(i)
 
 
-def test3():
-    l = [i for i in range(1000)]
+# def test3():
+#     l = [i for i in range(1000)]
 
 
-def test4():
-    l = list(range(1000))
+# def test4():
+#     l = list(range(1000))
 
 
 # popzero = timeit.Timer("x.pop(0)",
@@ -44,10 +44,10 @@ def test4():
 
 #     print("%d, %10.3f" % (i, lst_time))
 
-for i in range(1000, 1000001, 20000):
-    t = timeit.Timer("del x[random.randrange(%d)]" %
-                     i, "from __main__ import random, x")
-    x = list(range(i))
-    lst_time = t.timeit(number=1000)
+# for i in range(1000, 1000001, 20000):
+#     t = timeit.Timer("del x[random.randrange(%d)]" %
+#                      i, "from __main__ import random, x")
+#     x = list(range(i))
+#     lst_time = t.timeit(number=1000)
 
-    print("%d, %10.3f" % (i, lst_time))
+#     print("%d, %10.3f" % (i, lst_time))

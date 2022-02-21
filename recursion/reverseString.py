@@ -1,0 +1,2 @@
+def strRev(str):
+    if
