@@ -1,3 +1,3 @@
-myList = list(range(100))
+test_str = 'hello'
 
-print(range(20))
+print(len(test_str) % 2)

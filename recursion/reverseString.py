@@ -1,2 +1,0 @@
-def strRev(str):
-    if
