@@ -5,13 +5,19 @@ import random
 
 def tree(branchLen, t):
     if branchLen > 5:
-        len = random.randrange(1, 15)
+        if branchLen < 15:
+            t.color("lightgreen")
+        else:
+            t.color("green")
+        r = random.randrange(15, 40)
+        rl = random.randrange(10, 15)
+        t.width(branchLen // 20)
         t.forward(branchLen)
-        t.right(random.randrange(15, 45))
-        tree(branchLen-len, t)
-        t.left(random.randrange(15, 45))
-        tree(branchLen-len, t)
-        t.right(random.randrange(15, 45))
+        t.right(r)
+        tree(branchLen-rl, t)
+        t.left(r*2)
+        tree(branchLen-rl, t)
+        t.right(r)
         t.backward(branchLen)
 
 
