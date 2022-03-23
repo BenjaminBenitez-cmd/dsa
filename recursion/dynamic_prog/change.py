@@ -10,6 +10,8 @@ def getchange(amount, change, coins):
 
     return change
 
+# Inefficient recursive solution to change problem
+
 
 def recMC(coinValueList, change, knownResults):
     minCoins = change
