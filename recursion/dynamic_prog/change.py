@@ -31,4 +31,4 @@ def recMC(coinValueList, change, knownResults):
 
 
 if __name__ == '__main__':
-    print(recMC([10, 5, 25, 1], 63, [0]*64))
+    print(recMC([10, 5, 25, 1, 8], 33, [0]*34))

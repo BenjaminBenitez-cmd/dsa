@@ -1,9 +1,9 @@
-def toStr(n, base):
-    convertString = "0123456789ABCDEF"
-    if n < base:
-        return convertString[n]
+def toStr(str, base):
+    convertToString = "0123456789"
+    if base in convertToString:
+        return base
     else:
-        return toStr(n//base, base) + convertString[n % base]
+        return toStr(str // 2, base) + convertToString[str % base]
 
 
-print(toStr(12, 3))
+print(toStr(434, 10))

@@ -32,5 +32,3 @@ def palindrome(item):
 
 
 print(palindrome('civvic'))
-
-

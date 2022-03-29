@@ -4,8 +4,7 @@ rStack = Stack()
 
 
 def toStr(n, base):
-    convertString = "01234456789ABCDEF"
-
+    convertString = "0123456789ABCDEF"
     while n > 0:
         if n < base:
             rStack.push(convertString[n])
@@ -18,8 +17,7 @@ def toStr(n, base):
 
     while not rStack.isEmpty():
         res = res + str(rStack.pop())
-
     return res
 
 
-print(toStr(1435, 16))
+print(toStr(1223, 8))
