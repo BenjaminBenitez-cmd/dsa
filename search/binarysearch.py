@@ -12,7 +12,25 @@ def binarySearch(alist, item):
                 return binarySearch(alist[midpoint+1:], item)
 
 
+def iterBinarySearch(alist, low, high, item):
+    low = 0
+    high = len(alist) - 1
+    mid = 0
+
+    while low <= high:
+        mid = (high + low) // 2
+
+        if alist[mid] < item:
+            low = mid + 1
+
+        elif alist[mid] > item:
+            high = mid - 1
+        else:
+            return True
+
+    return False
+
+
 testlist = [0, 1, 2, 8, 13, 17, 19, 32, 42]
 
-print(binarySearch(testlist, 3))
-print(binarySearch(testlist, 13))
+print(iterBinarySearch(testlist, 0, 9, 11))
