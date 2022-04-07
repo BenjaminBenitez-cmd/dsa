@@ -55,6 +55,28 @@ class HashTable:
     def __setitem__(self, key, data):
         self.put(key, data)
 
+    def __len__(self):
+        count = 0
+        for i in self.slots:
+            if i != None:
+                count = count + 1
+        return count
+
+    def __contains__(self, key):
+        hashvalue = self.hashfunction(key, len(self.slots))
+
+        if self.slots[hashvalue] == key:
+            return True
+        else:
+            nextslot = self.rehash(hashvalue, len(self.slots))
+            while self.slots[nextslot] != None and self.slots[nextslot] != key:
+                nextslot = self.rehash(nextslot, len(self.slots))
+
+            if self.slots[nextslot] == None:
+                return False
+            else:
+                return True
+
 
 H = HashTable()
 H[54] = "cat"
@@ -75,3 +97,9 @@ print(H[17])
 H[20] = 'duck'
 print(H[20])
 print(H[99])
+print(H.slots)
+
+if 20 in H:
+    print('Found')
+else:
+    print('Not found')
