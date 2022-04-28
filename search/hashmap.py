@@ -58,10 +58,13 @@ class HashTable:
             if self.slots[hashvalue] == key:
                 self.data[hashvalue] = data  # replace
             else:
+                count = 0
+
                 if self.slots[hashvalue] == self.tomb:
                     tombhash = hashvalue
 
-                nextslot = self.rehash(hashvalue, len(self.slots))
+                nextslot = self.rehash(hashvalue, count, len(self.slots))
+                count += 1
 
                 while self.slots[nextslot] != None and \
                         self.slots[nextslot] != key:
@@ -69,7 +72,8 @@ class HashTable:
                     if self.slots[nextslot] == self.tomb and not tombhash:
                         tombhash = nextslot
 
-                    nextslot = self.rehash(nextslot, len(self.slots))
+                    nextslot = self.rehash(nextslot, count, len(self.slots))
+                    count += 1
 
                 if self.slots[nextslot] == None and tombhash == None:
                     self.slots[nextslot] = key
@@ -105,8 +109,8 @@ class HashTable:
     def hashfunction(self, key, size):
         return key % size
 
-    def rehash(self, oldhash, size):
-        return (oldhash+1) % size
+    def rehash(self, oldhash, i, size):
+        return (oldhash + i ^ 2) % size
 
     def loadfactor(self):
         return len(self) / self.size
@@ -164,10 +168,13 @@ class HashTable:
         if self.slots[hashvalue] == key:
             self.slots[hashvalue] = self.tomb
         else:
-            nextslot = self.rehash(hashvalue, len(self.slots))
-            while self.slots[nextslot] != None and self.slots[nextslot] != key:
-                nextslot = self.rehash(nextslot, len(self.slots))
+            count = 0
+            nextslot = self.rehash(hashvalue, count, len(self.slots))
+            count += 1
 
+            while self.slots[nextslot] != None and self.slots[nextslot] != key:
+                nextslot = self.rehash(nextslot, count, len(self.slots))
+                count += 1
             if self.slots[nextslot] == key:
                 self.slots[nextslot] = self.tomb
 

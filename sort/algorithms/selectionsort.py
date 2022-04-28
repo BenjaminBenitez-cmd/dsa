@@ -6,11 +6,10 @@ def selectionSort(alist):
             if alist[location] > alist[positionOfMax]:
                 positionOfMax = location
 
-        temp = alist[fillslot]
-        alist[fillslot] = alist[positionOfMax]
-        alist[positionOfMax] = temp
+        alist[fillslot], alist[positionOfMax] = alist[positionOfMax], alist[fillslot]
 
 
-alist = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-selectionSort(alist)
-print(alist)
+if __name__ == '__main__':
+    alist = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    selectionSort(alist)
+    print(alist)

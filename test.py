@@ -1,8 +1,6 @@
+alist = [1, 4, 2, 5, 7, 6, 9]
 
+half = len(alist) // 2
 
-def test(P1, P2):
-    print(P1[1])
-    print(P2[1])
-
-
-test((400, 50), (60, 30))
+print(alist[:half])
+print(alist[half:])

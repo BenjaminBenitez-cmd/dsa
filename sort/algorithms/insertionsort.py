@@ -11,6 +11,7 @@ def insertionSort(alist):
         alist[position] = currentvalue
 
 
-alist = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-insertionSort(alist)
-print(alist)
+if __name__ == '__main__':
+    alist = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    insertionSort(alist)
+    print(alist)
